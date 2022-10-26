@@ -20,7 +20,7 @@ class Alg(object):                  # each Alg object contains sets S (subset of
         self.S = S
         self.T = T
 
-    def augpath(self, G, M, U):   # implements augmenting path algorithm
+    def augpath(self, G, M, U):     # implements augmenting path algorithm, where G is an array representing the graph, M is a matching, and U is the set of vertices in the graph.
         if M.size == 1:             # if the matching consists of just one edge, initialize S and T
             self.S = U
             self.T = []
@@ -92,13 +92,13 @@ class Alg(object):                  # each Alg object contains sets S (subset of
                                     for v in self.S:            # change every marked vertex in S that isn't in the reset list to unmarked
                                         if v not in reset:
                                             v.marked = False
-                                    self.augpath(G, M, U)     # recursively call the algorithm again using this new matching
+                                    self.augpath(G, M, U)       # recursively call the algorithm again using this new matching
                                     break
                             if b == True:                       # if x is saturated by M, move on to the next iteration of the loop
                                 continue
                             M.edgeSet.append([x.num, y])        # otherwise, add an edge to M containing the num value of the Vertex object x along with the value of y
                             M.size += 1                         # increase the size of the matching M by 1
-                            self.augpath(G, M, U)             # recursively call the algorithm again to try to get a new edge to add to M
+                            self.augpath(G, M, U)               # recursively call the algorithm again to try to get a new edge to add to M
                 x.marked = True                                 # after we have checked all neighbours of x, we mark x and move on to the next iteration of the loop
         return M                                                # if we exit the loop, return the matching M
         
@@ -107,13 +107,14 @@ numX = int(input("Enter the number of vertices in X: "))
 numY = int(input("Enter the number of vertices in Y: "))
 array = [[0 for j in range(0,numY)] for i in range(0, numX)]    # adjacency matrix of the graph
 
-print("\nNow we will fill in the adjacency matrix.")
 print("Order the vertices in X as x1 to x" + str(numX) + " and the vertices in Y from y1 to y" + str(numY) + ".\n")
+print("For each vertex in X, list the vertices in Y that are adjacent to it, separated by spaces; for example, if y1 and y3 are adjacent to the given vertex, then you would enter '1 3'.")
 
 # gets each value in the adjacency matrix from the user
 for i in range(0,numX):
-    for j in range(0,numY):
-        array[i][j] = int(input("Enter the value in the adjacency matrix for (x" + str(i + 1) + ", y" + str(j + 1) + "): "))
+    yvals = input("Enter the values of each vertex in Y that is adjacent to x" + str(i+1) + ": ").split()
+    for j in yvals:
+        array[i][int(j)-1] = 1
 
 maxSize = 0                                 # size of the largest matching encountered so far will be stored here
 maxMatching = None                          # the largest matching encountered so far will be stored here
