@@ -215,4 +215,4 @@ This gives us our result; if we colour the corresponding edges in our graph, we 
 
 ![Graph with Maximum Matching](https://github.com/benstamour/maximum-matching/blob/main/pictures/graph4.PNG?raw=true "Graph with Maximum Matching")
 
-To use this program with your own graph, you can download and run the maxmatching.py file.
+To use this program with your own graph, you can download and run the maxmatching.py file with the command `python maxmatching.py`.
